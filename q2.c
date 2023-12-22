@@ -129,73 +129,6 @@ void* passenger(void* arg) {
     pthread_exit(NULL);
 }
 
-// int main() {
-//     // Get user input for the number of passengers and car capacity
-//     printf("Enter the number of passengers: ");
-//     scanf("%d", &numPassengers);
-
-//     printf("Enter the car capacity: ");
-//     scanf("%d", &carCapacity);
-
-//     int maxCars=ceil(numPassengers/carCapacity);
-    
-//     pthread_t carThread[maxCars];
-//     int carIndex = 0;
-
-//     int passengerCount = numPassengers;
-    
-//     for (int bloop = 0; bloop < maxCars; bloop++) {
-//         if(carCapacity>numPassengers){
-//             printf("Car capacity is greater than number of passengers");
-//             return 0;
-//         }
-//         // Initialize semaphores
-//         sem_init(&boardingSem, 0, 0);
-//         sem_init(&unboardingSem, 0, 0);
-//         sem_init(&waitLoading,0,0);
-//         sem_init(&waitUnloading,0,0);
-//         sem_init(&rideSem, 0, 0);
-//         sem_init(&loadCompleteSem, 0, 0);
-//         sem_init(&loadMutex, 0, 1);
-//         sem_init(&unloadMutex, 0, 1);
-//         sem_init(&boardMutex, 0, 1);
-//         sem_init(&offboardMutex, 0, 1);
-
-//         // Create car thread
-        
-//         pthread_t passengerThreads[MAX_PASSENGERS];
-
-//         // Create passenger threads
-//         pthread_create(&carThread[carIndex], NULL, car, NULL);
-//         for (int i = 0; i < carCapacity; ++i) {
-//             // WHAT IF CAR CAPACITY IS NOT A MULTIPLE OF CAR CAPACITY
-//             int* id = malloc(sizeof(int));
-//             *id = i;
-//             pthread_create(&passengerThreads[i], NULL, passenger, id);
-//             numPassengers--;
-//         }
-            
-//         // Join car thread
-//         pthread_join(carThread[carIndex], NULL);
-
-//         // Join passenger threads
-//         for (int i = 0; i < numPassengers; ++i) {
-//             pthread_join(passengerThreads[i], NULL);
-//         }
-
-//         // Destroy semaphores
-//         sem_destroy(&boardingSem);
-//         sem_destroy(&unboardingSem);
-//         sem_destroy(&rideSem);
-//         sem_destroy(&loadCompleteSem);
-//         // sem_destroy(&mutex);
-//         carIndex++;
-//     }
-
-//     return 0;
-// }
-
-
 int main() {
     // Get user input for the number of passengers and car capacity
     printf("Enter the number of passengers: ");
@@ -240,18 +173,6 @@ int main() {
             printf("\nCar capacity is greater than the number of passengers left\n");
             return 0;
         }
-
-        // // Initialize semaphores
-        // sem_init(&boardingSem, 0, 0);
-        // sem_init(&unboardingSem, 0, 0);
-        // sem_init(&waitLoading, 0, 0);
-        // sem_init(&waitUnloading, 0, 0);
-        // sem_init(&rideSem, 0, 0);       // set to 0 when logical error is fixed
-        // sem_init(&loadCompleteSem, 0, 0);
-        // sem_init(&loadMutex, 0, 1);
-        // sem_init(&unloadMutex, 0, 1);
-        // sem_init(&boardMutex, 0, 1);
-        // sem_init(&offboardMutex, 0, 1);
 
         // Create car thread inside the loop after calculating low and high
         pthread_create(&carThread[bloop], NULL, car, NULL);
